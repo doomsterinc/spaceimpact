@@ -10,7 +10,12 @@ imagem.onload = function () {
     var x = 20;
     //Desenhando a imagem
     for(var i = 1; 1 <= 5; i++){
-        context.drawImage(imagem, x, 20, 64, 32);
+        context.drawImage(imagem,   // path
+                          x,        // inicio
+                          20,       // final
+                          64,       // largura
+                          32        // altura
+        );
         x += 70;
     }
 };

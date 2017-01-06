@@ -12,7 +12,13 @@ window.onload = function () {
     //Novo path
     context.beginPath();
     //Desenhando 1 arco
-    context.arc(50, 50, 40, 90*Math.PI/180, 270*Math.PI/180, false);
+    context.arc(50,                 // x (centro)
+                50,                 // y (centro)
+                40,                 // raio
+                90*Math.PI/180,     // 90 graus
+                270*Math.PI/180,    // 270 graus
+                false               // anti-horario
+    );
     //Preenchimento
     context.fill();
     //Contorno
