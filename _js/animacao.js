@@ -1,4 +1,5 @@
-function Animacao () {
+function Animacao (context) {
+    this.context = context;
     this.sprites = [];
     this.ligado = false;
 }
@@ -27,12 +28,16 @@ Animacao.prototype = {
 
         // desenhamos os sprites
         for(var i in this.sprites)
-            this.sprites[].desenhar();
+            this.sprites[i].desenhar();
 
         // chamamos o procimo ciclo
         var animacao = this;
         requestAnimationFrame(function(){
             animacao.proximoFrame();
         });
+    },
+    limparTela: function () {
+        var ctx = this.context; //pra facilitar a escrita ;)
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
 }
