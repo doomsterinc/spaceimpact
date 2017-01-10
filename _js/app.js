@@ -1,24 +1,27 @@
 window.onload = function () {
-                    var canvas = document.getElementById('canvas');
-                var context = canvas.getContext('2d');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
 
-                //posicao inicial do personagem
-                var posicao = 0;
-                desenharPersonagem();
+    var posicao = 0;
+    desenharPersonagem();
 
-                document.addEventListener('keydown', function(evento){
-                   if(evento.keyCode == 37){
-                       posicao -= 10;
-                       desenharPersonagem();
-                   } else if (evento.keyCode == 39){
-                       posicao += 10;
-                       desenharPersonagem();
-                   }
-                });
+    var teclado = new Teclado(document);
 
-                //personagem para testes
-                function desenharPersonagem () {
-                    context.clearRect(0, 0, canvas.width, canvas.height);
-                    context.fillRect(posicao, 100, 20, 50);
-                }
+    requestAnimationFrame(animar);
+
+    function animar () {
+        if(teclado.pressionada(SETA_ESQUERDA)){
+            posicao -= 10;
+        } else if (teclado.pressionada(SETA_DIREITA)){
+            posicao += 10;
+        }
+
+        desenharPersonagem();
+        requestAnimationFrame(animar);
+    }
+
+    function desenharPersonagem () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillRect(posicao, 100, 20, 50);
+    }
 }
