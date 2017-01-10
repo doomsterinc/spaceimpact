@@ -2,26 +2,18 @@ window.onload = function () {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
 
-    var posicao = 0;
-    desenharPersonagem();
-
     var teclado = new Teclado(document);
+    var animacao = new Animacao(context);
 
-    requestAnimationFrame(animar);
+    //Sprite le o teclado para saber como se comportar
+    var heroi = new Heroi(context, teclado);
+    heroi.x = 0;
+    heroi.y = 100;
+    animacao.novoSprite(heroi);
 
-    function animar () {
-        if(teclado.pressionada(SETA_ESQUERDA)){
-            posicao -= 10;
-        } else if (teclado.pressionada(SETA_DIREITA)){
-            posicao += 10;
-        }
+    teclado.disparou(ESPACO, function(){
+        heroi.atirar();
+    });
 
-        desenharPersonagem();
-        requestAnimationFrame(animar);
-    }
-
-    function desenharPersonagem () {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillRect(posicao, 100, 20, 50);
-    }
+    animacao.ligar();
 }
