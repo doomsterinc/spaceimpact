@@ -1,15 +1,26 @@
-function Heroi (context, teclado) {
+'use strict';
+//Codigos unicos para as direcoes
+var DIRECAO_ESQUERDA = 1;
+var DIRECAO_DIREITA = 2;
+
+function Heroi(context, teclado, animacao) {
     this.context = context;
     this.teclado = teclado;
+    this.animacao = animacao;
     this.x = 0;
     this.y = 0;
+
+    //Direcao padrao
+    this.direcao = DIRECAO_DIREITA;
 }
 
 Heroi.prototype = {
     atualizar: function () {
         if (this.teclado.pressionada(SETA_ESQUERDA) && this.x > 0) {
+            this.direcao = DIRECAO_ESQUERDA;
             this.x -= 10;
         }else if (this.teclado.pressionada(SETA_DIREITA) && this.x < this.context.canvas.width - 20) {
+            this.direcao = DIRECAO_DIREITA;
             this.x += 10;
         }
     },
@@ -19,9 +30,10 @@ Heroi.prototype = {
     atirar: function () {
         var tiro = new Bola(this.context);
         tiro.x = this.x + 10;
-        tiro.y = this.y + 10; tiro.raio = 2;
+        tiro.y = this.y + 10;
+        tiro.raio = 2;
         tiro.cor = 'red';
-        if (this.teclado.pressionada(SETA_ESQUERDA))
+        if (this.direcao == DIRECAO_ESQUERDA)
             tiro.velocidadeX = -20;
         else
             tiro.velocidadeX = 20;

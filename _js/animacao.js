@@ -30,7 +30,7 @@ Animacao.prototype = {
         for(var i in this.sprites)
             this.sprites[i].desenhar();
 
-        // chamamos o procimo ciclo
+        // chamamos o proximo ciclo
         var animacao = this;
         requestAnimationFrame(function(){
             animacao.proximoFrame();

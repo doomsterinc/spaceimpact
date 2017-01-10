@@ -6,7 +6,7 @@ window.onload = function () {
     var animacao = new Animacao(context);
 
     //Sprite le o teclado para saber como se comportar
-    var heroi = new Heroi(context, teclado);
+    var heroi = new Heroi(context, teclado, animacao);
     heroi.x = 0;
     heroi.y = 100;
     animacao.novoSprite(heroi);
