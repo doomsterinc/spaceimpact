@@ -4,43 +4,35 @@
         <meta charset="utf-8">
         <title>Testando a classe Spritesheet</title>
         <!--<script src="_js/app.js"></script>
-        <script src="_js/animacao.js"></script>
         <script src="_js/bola.js"></script>
         <script src="_js/heroi.js"></script>
-        <script src="_js/teclado.js"></script>-->
+        -->
         <script src="_js/spritesheet.js"></script>
+        <script src="_js/animacao.js"></script>
+        <script src="_js/teclado.js"></script>
+        <script src="_js/sonic.js"></script>
     </head>
     <body>
         <main>
             <canvas id="canvas" width="500" height="500">
             </canvas>
             <script>
-                var context = document.getElementById('canvas').getContext('2d');
+                var canvas = document.getElementById('canvas');
+                var context = canvas.getContext('2d');
+
                 var imgSonic = new Image();
                 imgSonic.src = '_imgs/spritesheet.png';
 
-                //Quero passar : context, imagem, linhas, colunas
-                var sheet = new Spritesheet(context, imgSonic, 3, 8);
+                var teclado = new Teclado(document);
+                var animacao = new Animacao(context);
 
-                //Duração de cada quadro
-                sheet.intervalo = 60;
+                var sonic = new Sonic(context, teclado, imgSonic);
+                sonic.x = 0;
+                sonic.y = 200;
+                animacao.novoSprite(sonic);
 
-                //Correndo para a direita
-                sheet.linha = 1;
-
-                //Animação
-                imgSonic.onload = gameLoop;
-
-                function gameLoop(){
-                    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-
-                    //Avançar a animação
-                    sheet.proximoQuadro();
-
-                    //onde desenhar o quadro atual
-                    sheet.desenhar(100, 100);
-
-                    requestAnimationFrame(gameLoop);
+                imgSonic.onload = function() {
+                    animacao.ligar();
                 }
             </script>
         </main>
